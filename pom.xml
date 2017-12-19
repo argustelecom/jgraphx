@@ -4,15 +4,15 @@
 
 	<groupId>com.mxgraph</groupId>
 	<artifactId>jgraphx</artifactId>
-	<version>3.8.0</version>
+	<version>3.8.0.TASK-89620</version>
 	<packaging>jar</packaging>
 
 	<url>http://www.jgraph.com</url>
 
 	<properties>
-		<maven.compiler.source>1.5</maven.compiler.source>
-		<maven.compiler.target>1.5</maven.compiler.target>
-		<maven.compiler.compilerVersion>1.5</maven.compiler.compilerVersion>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -127,5 +127,13 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>artifactory</id>
+			<name>artifactory-ext-releases</name>
+			<url>http://git:8081/artifactory/ext-release-local</url>
+		</repository>
+	</distributionManagement>
 
 </project>
