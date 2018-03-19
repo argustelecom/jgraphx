@@ -132,6 +132,8 @@ public class mxCodecRegistry
 				{
 					log.log(Level.SEVERE, "Failed to create and register a codec for the name: " + name, e);
 				}
+			} else {
+				log.severe("Failed to create codec for " + name);
 			}
 			else
 			{

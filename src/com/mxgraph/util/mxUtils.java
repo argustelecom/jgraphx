@@ -2035,6 +2035,8 @@ public class mxUtils
 					{
 						log.log(Level.SEVERE, "Failed to read the image from " + realUrl, e1);
 					}
+				} else {
+					log.log(Level.SEVERE, "Failed to load image from " + url);
 				}
 				else
 				{

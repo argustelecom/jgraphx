@@ -1,26 +1,10 @@
-*.log
-.#*
-*.*~
-*.jsfdia
-*.orig
-*.bak
-*.ids
-*.iml
-*.ipr
-*.iws
-target*
-.ideaDataSources
-dataSources
-target/
-RemoteSystemsTempFiles/
-.forge_settings
-bin/
-.project
-.idea
-.ideaDataSources
-dataSources
-.classpath
-.settings/
-*~
-#*#
-*.bak
+# maven
+/target/
+# eclipse
+/bin/
+/classes/
+/.settings/
+/.classpath
+/.project
+# it's common to redirect maven output to a build log
+/*.log
