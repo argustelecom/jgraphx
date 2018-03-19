@@ -135,10 +135,6 @@ public class mxCodecRegistry
 			} else {
 				log.severe("Failed to create codec for " + name);
 			}
-			else
-			{
-				log.severe("Failed to create codec for " + name);
-			}
 		}
 
 		return codec;

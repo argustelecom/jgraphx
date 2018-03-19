@@ -2038,10 +2038,6 @@ public class mxUtils
 				} else {
 					log.log(Level.SEVERE, "Failed to load image from " + url);
 				}
-				else
-				{
-					log.log(Level.SEVERE, "Failed to load image from " + url);
-				}
 			}
 		}
 
