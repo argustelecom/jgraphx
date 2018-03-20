@@ -106,7 +106,10 @@ public class mxMinimumCycleRemover implements mxHierarchicalLayoutStage
 				seenNodes);
 
 		// Pick a random cell and dfs from it
-		mxGraphHierarchyNode[] unseenNodesArray = new mxGraphHierarchyNode[1];
+		//mxGraphHierarchyNode[] unseenNodesArray = new mxGraphHierarchyNode[1];
+		//unseenNodes.toArray(unseenNodesArray); this picks random cell only when unseenNodes.size == 1
+		//Will dfs from all unseenNodes, as mxClient.js actualy do
+		mxGraphHierarchyNode[] unseenNodesArray = new mxGraphHierarchyNode[unseenNodes.size()];
 		unseenNodes.toArray(unseenNodesArray);
 		
 		model.visit(new mxGraphHierarchyModel.CellVisitor()

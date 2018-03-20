@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.view.mxGraph;
@@ -28,6 +29,8 @@ import com.mxgraph.view.mxGraph;
  */
 public class mxGraphHierarchyModel
 {
+	private static final Logger log = Logger.getLogger(mxGraph.class.getName());
+	
 	/**
 	 * Stores the largest rank number allocated
 	 */
@@ -298,6 +301,9 @@ public class mxGraphHierarchyModel
 		List<mxGraphHierarchyNode> startNodesCopy = new ArrayList<mxGraphHierarchyNode>(
 				startNodes);
 
+		//number of serial (sequential) iterations thats not removed anything from startNodes
+		long serialIdleIterations=0;
+		
 		while (!startNodes.isEmpty())
 		{
 			mxGraphHierarchyNode internalNode = startNodes.getFirst();
@@ -377,6 +383,7 @@ public class mxGraphHierarchyModel
 				}
 
 				startNodes.removeFirst();
+				serialIdleIterations = 0;
 			}
 			else
 			{
@@ -384,13 +391,21 @@ public class mxGraphHierarchyModel
 				// the class and put the dunces cap on
 				Object removedCell = startNodes.removeFirst();
 				startNodes.addLast(internalNode);
+				serialIdleIterations ++;
 
 				if (removedCell == internalNode && startNodes.size() == 1)
 				{
 					// This is an error condition, we can't get out of
 					// this loop. It could happen for more than one node
 					// but that's a lot harder to detect. Log the error
-					// TODO make log comment
+					log.warning("initialRank: Infinite loop detected with startNodes.size == 1. Exiting loop.");
+					break;
+				}
+				
+				if (serialIdleIterations == startNodes.size()) {
+					//for more than one node we can detect this as N sequenced iterations that not removed any item from 
+					//startNodes.
+					log.warning("initialRank: Infinite loop detected with startNodes.size == " + startNodes.size());
 					break;
 				}
 			}
