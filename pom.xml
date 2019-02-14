@@ -29,6 +29,7 @@
 				</excludes>
 			</resource>
 		</resources>
+		<testSourceDirectory>examples</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
