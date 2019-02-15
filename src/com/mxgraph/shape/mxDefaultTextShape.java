@@ -43,6 +43,30 @@ public class mxDefaultTextShape implements mxITextShape
 				g.translate(w / 2 - h / 2, h / 2 - w / 2);
 			}
 
+			double rotation = mxUtils.getDouble(style, mxConstants.STYLE_ROTATION, 0);
+			if (rotation != 0) {
+				// здесь с наскоку не получилось сделать нужный translate после поворота, поэтому правильно отображается
+				// только текст по центру без всяких align/position
+				// x, y надо транслировать в левую-верхнюю точку лейбла (в его ориентации, т.е. относительно текста)
+				// в js аналогичное действие можно наблюдать в mxSvgCanvas2D#updateText и #text
+				// проще, наверное, почитать туториалы про графику, rotate и translate
+				// обрати внимание, что rotate включает в себя два translate (см. javadoc)
+				// раскоментируй цветные линии для лучшего понимания
+				/*-g.setColor(Color.GREEN);
+				g.drawLine(x, y, x+10, y);*/
+				g.rotate(Math.toRadians(rotation), x + w / 2, y + h / 2);
+				/*-g.setColor(Color.RED);
+				g.drawLine(x, y, x+10, y);
+				
+				double rad = Math.toRadians(rotation);
+				mxPoint rp = mxUtils.getRotatedPoint(new mxPoint(w/2, h/2), Math.cos(rad), Math.sin(rad));
+				
+				g.translate(rp.getX() - w/2, rp.getY() - h/2);
+
+				g.setColor(Color.YELLOW);
+				g.drawLine(x, y, x+10, y);*/
+			}
+
 			Color fontColor = mxUtils.getColor(style,
 					mxConstants.STYLE_FONTCOLOR, Color.black);
 			g.setColor(fontColor);

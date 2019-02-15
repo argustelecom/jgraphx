@@ -112,6 +112,12 @@ public class mxHtmlTextShape implements mxITextShape
 				h = tmp;
 			}
 
+			double rotation = mxUtils.getDouble(style, mxConstants.STYLE_ROTATION, 0);
+			if (rotation != 0) {
+				// ущербная реализация, подробнее см. mxDefaultTextShape
+				g.rotate(Math.toRadians(rotation), x + w / 2, y + h / 2);
+			}
+
 			// Replaces the linefeeds with BR tags
 			if (isReplaceHtmlLinefeeds())
 			{
