@@ -28,7 +28,9 @@ public class mxLightweightLabel extends JLabel
 	/**
 	 * 
 	 */
-	protected static mxLightweightLabel sharedInstance;
+	// не уверен, что JLabel в принципе можно использовать многопоточно, даже с отдельными инстансами - Swing говорит,
+	// что все должно делаться через Event Dispatching Thread, но, может быть, это только про настоящее GUI приложение?
+	protected static ThreadLocal<mxLightweightLabel> sharedInstance;
 
 	/**
 	 * Initializes the shared instance.
@@ -37,7 +39,7 @@ public class mxLightweightLabel extends JLabel
 	{
 		try
 		{
-			sharedInstance = new mxLightweightLabel();
+			sharedInstance = ThreadLocal.withInitial(mxLightweightLabel::new);
 		}
 		catch (Exception e)
 		{
@@ -50,7 +52,7 @@ public class mxLightweightLabel extends JLabel
 	 */
 	public static mxLightweightLabel getSharedInstance()
 	{
-		return sharedInstance;
+		return sharedInstance.get();
 	}
 
 	/**
